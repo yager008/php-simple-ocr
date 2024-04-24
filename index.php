@@ -4,7 +4,7 @@ use thiagoalessio\TesseractOCR\TesseractOCR;
 
 require 'vendor/autoload.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['file'])) {
     if (isset($_POST['submit'])) {
         $file_name = $_FILES['file']['name'];
         $tmp_file = $_FILES['file']['tmp_name'];
@@ -74,24 +74,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="card-body">
 
 
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form id="form_id" action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
 
-                            <label for="filechoose">Choose File</label>
-
-                            <input type="file" name="file" class="form-control-file" id="filechoose">
-
+                            <label for="input_file_field_id">Choose File</label>
+                            <input type="file" name="file" class="form-control-file" id="input_file_field_id">
                             <button class="btn btn-success mt-3" type="submit" name="submit">Upload</button>
 
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+
+        const form = document.getElementById("form_id");
+        const fileInput = document.getElementById("input_file_field_id");
+
+        fileInput.addEventListener('change', () => {
+            form.submit();
+        });
+
+        window.addEventListener('paste', e => {
+            fileInput.files = e.clipboardData.files;
+        });
+
+
+
+    </script>
 </body>
 </html>

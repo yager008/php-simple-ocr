@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['file'])) {
         $file_name = $_FILES['file']['name'];
         $tmp_file = $_FILES['file']['tmp_name'];
 
-
         if (!session_id()) {
             session_start();
             $unq = session_id();
@@ -54,15 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['file'])) {
             <div class="col-sm-8 mx-auto">
                 <div class="jumbotron">
                     <h1 class="display-4">Read Text from Images</h1>
-                    <p class="lead">
-
+                <p class="lead">
 
                         <?php if ($_POST) : ?>
                             <pre>
                                 <?= $fileRead ?>
                             </pre>
                         <?php endif; ?>
-
 
                 </p>
                 <hr class="my-4">
@@ -101,8 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['file'])) {
         window.addEventListener('paste', e => {
             fileInput.files = e.clipboardData.files;
         });
-
-
 
     </script>
 </body>
